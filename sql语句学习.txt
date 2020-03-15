@@ -1,0 +1,192 @@
+-- where子句
+select * from adviser;
+
+select * from adviser where adviser_id like "14%";
+
+select * from adviser where adviser_id in ("1404","15001")
+
+
+select * from adviser where adviser_id between 1500 and 20000;
+
+select * from adviser where adviser_id >5000 and adviser_id <10000;
+
+select * from adviser where logo_url is not null;
+
+select * from adviser where logo_url <=> null;
+
+select name 姓名 from adviser where adviser_id like "_4%";
+
+-- order by 排序字句
+select * from adviser ORDER BY create_time desc;
+
+select * from adviser order by create_time asc;
+
+select * from adviser where adviser_id>10000 ORDER BY CREATE_TIME asc;
+
+select name 姓名,IFNULL(logo_url,0) from adviser ORDER BY IFNULL(LOGO_URL,0);
+
+select * from user_login order by party_id asc,user_login_id desc;
+
+-- 字符函数
+select length("hhh123") 字符长度;
+
+select concat("adviser","_","id","sfgs");   /*拼接函数*/
+
+select UPPER('hhh');   /*字符转换成大写*/
+
+select LOWER("HHH");   /*字符转换成小写*/
+
+	--1.
+	/*
+	字符串截取函数；
+	截取从指定索引处后面所有字符；
+	sql语言中索引从1开始
+	*/
+	select SUBSTR("12345",-3) as out_put;
+
+	/*
+	字符串截取函数；
+	截取从指定索引处指定字符长度的字符；
+	sql语言中索引从1开始；
+	*/
+	select SUBSTR("1234523452345234",2,3) as out_put;
+
+	select concat(upper(SUBSTR("last_id",1,4)),"_",substr("last_id",-2)) as out_put;   /*字符函数案例*/
+
+	--2.查询索引函数
+	/*  
+	instr  子字符串在父字符当值第一次出现的索引位置，如果找不到则返回0
+					子串		父串	输出别名
+	select INSTR("asdfdaasdfa","sdf") as output;
+	*/  
+	select INSTR("asdfdaasdfa","aa") as output;
+
+	--3.去除字符首尾字符
+	/*
+	TRIM  去除字符串收尾指定的字符
+	*/
+	select TRIM("aa"from "aaaaaaa张aaaaaaaaaaa哈哈aaaaa" ) as outPUT; /*去除指定字符*/
+	SELECT TRIM("        aaaa  aa    aaa   ") output  /*当前未指定需要去除的字符，默认去除收尾的空格*/
+	--4.填充字符串到指定长度
+	/* 
+	lpad  用指定的字符实现左填充指定的长度,如果给定的字符长度超过指定的长度，则会截断字符
+	rapd  用指定的字符实现右填充指定的长度,如果给定的字符长度超过指定的长度，则会截断字符
+	*/
+	select LPAD("郭钦",10,"&*") as outPut;
+	select rpad("郭钦123",10,"&*") as outPut;
+	select rpad("郭钦123",3,"&*") as outPut;
+	
+	--5.替换函数
+	/* 
+	replace 替换
+					原字符串		 需替换字符  替换后的字符
+	select REPLACE("张无忌爱上了周芷若","周芷若","赵敏") outPut;
+	*/ 
+	select REPLACE("张无忌爱上了周芷若","周芷若","赵敏") outPut;
+
+
+二、数学函数
+	1. round 四舍五入
+		select round(1.45)
+		select round(1.345,2)
+		
+	2. ceil 向上取整，返回>=该参数的最小整数
+		select ceil(-1.02)
+		
+	3. floor 向下取整，返回<=该参数的最大整数
+		select floor(-9.99)
+		
+	4. truncate 截断
+		select truncate(1.67323,2)
+		
+	5. mod 取余
+		select mod(10,-3)
+		运算公式：a-a/b*b
+		
+三、日期函数
+	1. now 返回当前系统日期和+时间
+		select now()
+		
+	2. curdate 返回当前系统日期，不包含时间
+		select curdate()
+		
+	3. curtime 返回当前时间，不包含日期
+		select curtime()
+		
+	4. 获取指定的部分，年、月、日、小时、分钟、秒
+		年 year(date)
+		select year(now())
+		
+		月 month(date)
+		select month(now())
+		
+		日 day(date)    小时 hour(date)   分钟 minute(date)    秒 second(date)
+		
+	5. str_to_date 将日期格式的字符转换成指定格式的日期
+		select str_to_date("2020-3-2","%Y-%m-%d")
+		
+	   data_format 将日期转换成字符
+		select date_format(now(),"%Y/%m/%d")
+		
+四、其它函数
+	1. version() 查看版本号
+		select version()
+		
+	2. database() 查看当前数据库
+		select database()
+		
+	3. user() 查看当前用户
+		select user()
+		
+五、流程控制函数
+	1. if函数: if else的效果
+				  条件	if  else	
+		select if(10>5,"大","小")
+	
+	2. case函数
+	使用一：swith case 的效果
+		语法：
+		case 要判断的常量或表达式
+		when 常量1 then 要显示的值或语句1;
+		when 常量2 then 要显示的值或语句1;
+		...
+		else 要显示的值n或语句n;
+		end
+		例句：
+		select name,adviser_id, 
+			case state
+			when 1 then version*2
+			when 2 then version*3
+			else version
+			end as 新version
+		from adviser;
+	
+	使用二：类似于多重if
+		语法：
+		case 
+		when 条件1 then 要显示的值1或语句1
+		when 条件2 then 要显示的值1或语句2
+		...
+		else 要显示的值n或语句n
+		end
+		
+		例句
+		select name,adviser_id,
+			case 
+			when VERSION<=50 then version
+			when VERSION>50 then version*2
+			else VERSION*3
+			end as 新数据
+		FROM adviser;
+		
+分组函数
+	1. sum 求和、avg平均值、max最大值、min最小值、count计算个数
+		以上函数都会忽略null值
+		和distinct搭配，去重处理
+		select sum(version) from adviser;
+		select sum(distinct version) from adviser;
+		效率：
+		MYSIAM存储引擎下，count(*)的效率高,
+		INNODB存储引擎下，count(常量)和count(*)的效率差不多，比count(字段)要高的多
+		
+	

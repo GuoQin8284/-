@@ -1,0 +1,90 @@
+
+1. 最小用户配置Git
+	cmd窗口输入：
+	需要先设置用户名后才能打开list
+	git config --global user.name "guoqin"  设置git的用户名
+	git config --global user.email "1143908462@qq.com"   设置git用户的邮箱
+	git config --global --list   查看git当前信息
+	
+2. 配置local信息
+	git config --local 只对仓库有效
+	git config --global 对登录用户的所有仓库有效
+	git config --system 对系统的所有用户有效
+	
+	
+3. 提交文件
+	git add 文件名  将指定文件提交到缓存区
+	git add .   将文件夹下所有文件提交到缓存区
+	git commit -m 备注信息   
+	git log 查看提交信息
+	git reflog  查看所有版本
+	git log --pretty=ontline   查看日志，每条日志显示一行
+	使用 git commit -a -m 可以省略git add步骤
+	
+	
+4. 版本状态查看
+	git status 查看文件详细的版本信息
+	git status -s 查看文件详细的简洁信息
+	
+5. 删除文件
+	git restore 文件名  删除未添加到暂存区的文件版本
+	git rm 文件名  删除文件
+	git rm --cached  文件名     将文件从版本控制器里面删除，但保留本地文件
+	git rm *.py   删除所有以py结尾的文件
+	
+6. 移动文件
+	git mv 老文件名 目标文件夹/新文件名         将老文件移动到新文件夹，并且可以给新文件命名
+	*文件必须提交到git之后，才能用git MV ，如果文件没有提交到git   则直接用MV命令
+	
+7. 文件补录
+	git commit -amend -a   将更新的文件直接提交到版本控制系统，而不产生新的版本
+	
+	
+8. .gitignore忽略文件
+	# 注释
+	* 匹配0或任意字符
+	[abc] 匹配一个在括号内的字符
+	[0-9] 匹配0-9的字符
+	? 匹配一个任意字符
+	/ 结尾指定的字符
+	！取反
+	
+9. git diff版本对比
+	git diff  在文件件没有添加到暂存区间之前，查看当前文件与上一个版本的区别
+	git 
+	
+10. git tag -a 标签名称 -m "提交信息"
+	git tag 标签名称    轻量标签
+	git tag -a 标签名称   补录标签
+	git show 标签名称  查看版本内容
+	git tag -l "V1.0.0"  获取系统指定标签
+	git tag 获取系统所有标签
+	git tag -d 标签名称  删除指定的标签
+	
+11. 回退版本
+	(1).通过checkout 回退
+		git checkout 版本号      根据版本号回退到指定的版本
+		git reflog  查看所有的版本信息
+		git checkout 标签名   根据标签名回退到指定版本
+	(2).通过 reset --hard回退
+		git reset --hard 版本号
+	
+12. git alias 别名
+	git config --global alias.st "status"    将status指令起一个别名为st
+	
+13. git远程地址
+	git remote 查看远程地址
+	git remote -v 详细的远程地址
+	git remote add 名称 远程url
+	git remote show 远程名称
+	git push study master
+	git fetch study
+	git pull study
+	
+14. 分支相关命令
+	查看分支：git branch
+	查看分支：git branch 分支名
+	切换分支：git checkout 分支名
+	删除分支：git branch -d 分支名
+	合并分支：git merge 被合并的分支名
+	注意：删除分支的时候一定要先退出要删除的分支，否则删除不了
