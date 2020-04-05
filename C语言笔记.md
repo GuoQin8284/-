@@ -1,0 +1,1 @@
+1.bool类型    <stdbool.h>
