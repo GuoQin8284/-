@@ -1,0 +1,12 @@
+断点命令：
+请求断点：bpu
+格式: bpu  url字符串
+
+响应断点：bpafer
+格式：bpafter url字符串
+
+根据响应码设置断点命令：bps
+格式：bps 404
+
+根据请求方式设置断点命令：bpm
+格式：bpm post
