@@ -1,0 +1,20 @@
+add get-state   查看当前连接状态（offline(设备连接异常)、device(连接正常)、unknown(没有连接设备)）
+add bugreport  输出日志报错logcat,功耗，cpu等信息日志
+add logcat 查看系统日志（日志分为：system(系统日志)，main(应用日志)，event(按键日志)，radio(通信日志)），默认查看main日志
+add logcat -b main 查看指定的日志
+add devices  查看连接的设备
+
+add shell pm list packages 查看所有的应用包名
+add shell dumpsys activity 查看当前活动的包的信息
+add shell dumpsys window | findstr mCurrentFocus 查看正在运行的包名和界面名
+
+adb install xxxxx.apk 安装应用
+adb uninstall 包名  卸载应用
+
+adb shell cat/proc/cpuinfo  获取cpu信息
+
+adb push d:\xxx.txt /sdcard  从电脑推送到手机
+adb pull /sdcard/xxx.txt d:/ 从手机上下载文件到电脑
+
+adb root 进入root模式
+adb shell 进入shell命令状态（安卓是基于linux内核的，因此在shell状态下可以使用shell命令）

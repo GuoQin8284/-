@@ -10,3 +10,5 @@
 
 根据请求方式设置断点命令：bpm
 格式：bpm post
+
+AutoResponseder 功能可以将线上的资源替换为本地资源
