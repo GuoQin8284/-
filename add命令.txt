@@ -1,20 +1,54 @@
-add get-state   查看当前连接状态（offline(设备连接异常)、device(连接正常)、unknown(没有连接设备)）
-add bugreport  输出日志报错logcat,功耗，cpu等信息日志
-add logcat 查看系统日志（日志分为：system(系统日志)，main(应用日志)，event(按键日志)，radio(通信日志)），默认查看main日志
-add logcat -b main 查看指定的日志
-add devices  查看连接的设备
+adb get-state   查看当前连接状态（offline(设备连接异常)、device(连接正常)、unknown(没有连接设备)）
+adb bugreport  输出日志报错logcat,功耗，cpu等信息日志
+adb logcat 查看系统日志（日志分为：system(系统日志)，main(应用日志)，events(按键日志)，radio(通信日志)），默认查看main日志
+adb logcat -b main 查看指定的日志
+adb devices  查看连接的设备
+adb -s xxx序列号 shell  发现多个设备时，指定要操作的手机
 
-add shell pm list packages 查看所有的应用包名
-add shell dumpsys activity 查看当前活动的包的信息
-add shell dumpsys window | findstr mCurrentFocus 查看正在运行的包名和界面名
+adb shell pm list packages 查看所有的应用包名
+adb shell dumpsys activity 查看当前活动的包的信息
+adb shell dumpsys window | findstr mCurrentFocus 查看正在运行的包名和界面名
+adb shell am monitor  获取手机当前启动App的包名
+adb shell dumpsys window w |findstr \/ |findstr name=  查看手机当前启动App的应用名和包名
+
 
 adb install xxxxx.apk 安装应用
 adb uninstall 包名  卸载应用
 
-adb shell cat/proc/cpuinfo  获取cpu信息
+adb shell cat /proc/cpuinfo  获取cpu信息
+adb shell dumpsys battery  获取电池信息
+adb shell wm size  获取分辨率
+adb shell dumps battery xxx包名  获取xxx应用的耗电情况
+adb shell getprop ro.build.version.release 获取系统版本号
+adb shell ps 查看进程
+adb shell cat /proc/meminfo 查看当前内存占用
+adb reboot 重启手机
+adb shell cat /sys/class/net/wlan0/address  查看mac地址（物理地址）
+adb shell am -W 包名/启动名   获取app启动时间，“-W”要大写
+
+adb shell top -m 10 -s 10
+-H显示线程
+-k回退排序字段（默认值为-S、%CPU、-ETIME、-PID）
+-o显示字段（def PID、USER、PR、NI、VIRT、RES、SHR、S、%CPU、%MEM、TIME+、CMDLINE）
+-O添加字段（从默认值替换PR、NI、VIRT、RES、SHR、S）
+-s按字段编号排序（1-X，默认9）
+-b批处理模式（无tty）
+-d每个循环之间的延迟秒数（默认值3）
+-m要显示的最大任务数
+-n在数字迭代后退出
+-p显示这些PID
+-显示这些用户
+-q静音（无标题行）
 
 adb push d:\xxx.txt /sdcard  从电脑推送到手机
 adb pull /sdcard/xxx.txt d:/ 从手机上下载文件到电脑
 
 adb root 进入root模式
 adb shell 进入shell命令状态（安卓是基于linux内核的，因此在shell状态下可以使用shell命令）
+
+adb kill-server  关闭adb服务
+adb start-server  开启adb服务
+
+adb shell screencap -p /sdcard/screen.png  截屏到指定目录
+
+adb version 查看adb版本
