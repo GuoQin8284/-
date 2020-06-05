@@ -190,3 +190,5 @@ select LOWER("HHH");   /*字符转换成小写*/
 		INNODB存储引擎下，count(常量)和count(*)的效率差不多，比count(字段)要高的多
 		
 	
+分析查询语句：
+explain 查新语句；
