@@ -24,7 +24,7 @@ adb shell ps 查看进程
 adb shell cat /proc/meminfo 查看当前内存占用
 adb reboot 重启手机
 adb shell cat /sys/class/net/wlan0/address  查看mac地址（物理地址）
-adb shell am -W 包名/启动名   获取app启动时间，“-W”要大写
+adb shell am start -W 包名/启动名   获取app启动时间，“-W”要大写
 
 adb shell top -m 10 -s 10
 -H显示线程
